@@ -1,11 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' //npm i react-router-dom react-router
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
       <div className="container">
-        navbar...
+        <Navbar />
         <Switch>
           <Route path="/" exact>
             inicio...
