@@ -4,21 +4,26 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
+    const [error, setError] = useState(null)
 
     const procesarDatos = e => {
         e.preventDefault();
+
         if(!email.trim()){
-            console.log('Ingrese un e-mail')
+            setError('Ingrese un e-mail')
+         
             return
         }
         if(!pass.trim()){
-            console.log('Ingrese un password')
+            setError('Ingrese un password')
             return
         }
         if(pass.length < 6){
-            console.log('Password mayor a 6 carácteres')
+            setError('Password de 6 carácteres o más')
             return
         }
+        //Limpiar el mensaje de error
+        setError(null)
         console.log('Pasando todas las validaciones!')
     }
 
@@ -30,6 +35,10 @@ const Login = () => {
             <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <form onSubmit={procesarDatos}>
+
+                    {/*error && = error ? : null*/}
+                    { error && (<div className="alert alert-danger">{error}</div>) } 
+
                         <input 
                             type="email"
                             className="form-control mb-2"
