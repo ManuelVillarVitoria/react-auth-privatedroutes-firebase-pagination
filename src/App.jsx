@@ -1,29 +1,46 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' //npm i react-router-dom react-router
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Admin from './components/Admin';
 
+import {auth} from './firebase';
+
 function App() {
-  return (
-    <Router>
-      <div className="container">
-        <Navbar />
-        <Switch>
-          <Route path="/" exact>
-            inicio...
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/admin">
-            <Admin />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-   
-  );
+
+  const [firebaseUser, setFirebaseUser] = useState(false)
+
+  useEffect(() => {
+      auth.onAuthStateChanged(user => {
+          console.log(user)
+          if(user){
+              setFirebaseUser(user)
+          }else{
+              setFirebaseUser(null)
+          }
+      })
+  }, [])
+  
+  return firebaseUser !== false ? (
+      <Router>
+          <div className="container">
+              <Navbar firebaseUser={firebaseUser} />
+              <Switch>
+                  <Route path="/login">
+                      <Login />
+                  </Route>
+                  <Route path="/admin">
+                      <Admin />
+                  </Route>
+                  <Route path="/" exact>
+                      Ruta de inicio
+                  </Route>
+              </Switch>
+          </div>
+      </Router>
+  ) : (
+      <div>Cargando...</div>
+  )
 }
 
 export default App;
