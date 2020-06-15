@@ -22,10 +22,11 @@ const Admin = (props) => {
 
     return ( 
         <div>
-              <h2>Ruta protegida</h2>
+            <h2>Ruta protegida</h2>
 
+            { user && (<h3>{user.email}</h3>)}
+            
         </div>
-  
      );
 }
  
