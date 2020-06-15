@@ -5,6 +5,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [error, setError] = useState(null)
+    const [esRegistro, setEsRegistro] = useState(true)
 
     const procesarDatos = e => {
         e.preventDefault();
@@ -30,7 +31,11 @@ const Login = () => {
 
     return (  
         <div className="mt-5">
-            <h3 className="text-center">Acceso o Registro de usuarios</h3>
+            <h3 className="text-center">
+
+            { esRegistro ? 'Registro de usuarios' : 'Login de acceso' }
+
+            </h3>
             <hr/>
             <div className="row justify-content-center">
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
@@ -39,7 +44,7 @@ const Login = () => {
                     {/*error && = error ? : null*/}
                     { error && (<div className="alert alert-danger">{error}</div>) } 
 
-                        <input 
+                        <input name
                             type="email"
                             className="form-control mb-2"
                             placeholder="Ingrese un e-mail"
@@ -57,13 +62,16 @@ const Login = () => {
                             className="btn btn-dark btn-lg btn-block"
                             type="submit"
                         >
-                            Registrarse
+                            {esRegistro ? 'Registrar' : 'Acceder'}
+
                         </button>
                         <button 
                             className="btn btn-sm btn-info btn-block"
                             type="button"
+                            onClick={() => setEsRegistro(!esRegistro)}
                         >
-                            ¿ Ya tienes cuenta ?
+                            { esRegistro ? '¿ Ya estás registrado ?' : '¿ No tienes cuenta ?' }
+
                         </button>
                     </form>
                 </div>
