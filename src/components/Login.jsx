@@ -30,10 +30,33 @@ const Login = () => {
 
         if(esRegistro) {
             registrar()
+        } else {
+            login()
         }
     }
 
-    const registrar = useCallback(async () => {
+    const login = useCallback(async() => {
+
+        try {
+            const res = await auth.signInWithEmailAndPassword(email, pass)
+            console.log(res.user) 
+            setEmail('')
+            setPass('')
+            setError(null)
+
+        } catch (error) {
+            //console.log(error)
+            if(error.code === 'auth/user-not-found') {
+                setError('Usuario no registrado')
+            }
+            if(error.code === 'auth/wrong-password') {
+                setError('Contraseña incorrecta')
+            }
+        }
+    }, [email, pass])
+
+    
+    const registrar = useCallback(async() => {
 
         try {
             const res = await auth.createUserWithEmailAndPassword(email, pass)
