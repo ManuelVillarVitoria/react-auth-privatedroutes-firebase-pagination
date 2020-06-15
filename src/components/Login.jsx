@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
+import {auth} from '../firebase';
 
 const Login = () => {
 
@@ -26,7 +27,29 @@ const Login = () => {
         //Limpiar el mensaje de error
         setError(null)
         console.log('Pasando todas las validaciones!')
+
+        if(esRegistro) {
+            registrar()
+        }
     }
+
+    const registrar = useCallback(async () => {
+
+        try {
+            const res = await auth.createUserWithEmailAndPassword(email, pass)
+            console.log(res.user)
+
+        } catch (error) { 
+            //console.log(error)
+            if(error.code === 'auth/invalid-email') {
+                setError('E-mail no válido')
+            }
+            if(error.code === 'auth/email-already-in-use') {
+                setError('E-mail ya utilizado')
+            }
+        }
+
+    }, [email, pass])
 
 
     return (  
@@ -44,7 +67,7 @@ const Login = () => {
                     {/*error && = error ? : null*/}
                     { error && (<div className="alert alert-danger">{error}</div>) } 
 
-                        <input name
+                        <input
                             type="email"
                             className="form-control mb-2"
                             placeholder="Ingrese un e-mail"
