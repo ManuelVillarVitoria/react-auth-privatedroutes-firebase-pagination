@@ -1,7 +1,8 @@
 import React, {useState, useCallback} from 'react';
 import {auth, db} from '../firebase';
+import {withRouter} from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
 
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
@@ -43,6 +44,7 @@ const Login = () => {
             setEmail('')
             setPass('')
             setError(null)
+            props.history.push('/admin')
 
         } catch (error) {
             //console.log(error)
@@ -53,9 +55,9 @@ const Login = () => {
                 setError('Contraseña incorrecta')
             }
         }
-    }, [email, pass])
+    }, [email, pass, props.history])
 
-    
+
     const registrar = useCallback(async() => {
 
         try {
@@ -68,6 +70,7 @@ const Login = () => {
             setEmail('')
             setPass('')
             setError(null)
+            props.history.push('/admin')
             
         } catch (error) { 
             //console.log(error)
@@ -79,7 +82,7 @@ const Login = () => {
             }
         }
 
-    }, [email, pass])
+    }, [email, pass, props.history])
 
 
     return (  
@@ -133,4 +136,4 @@ const Login = () => {
     );
 }
  
-export default Login;
+export default withRouter(Login);
