@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Fragment} from 'react';
 import {withRouter} from 'react-router-dom';
 import {auth} from '../firebase';
+import Firestore from './Firestore';
 
 
 const Admin = (props) => {
@@ -21,13 +22,15 @@ const Admin = (props) => {
 
 
     return ( 
-        <div>
-            <h2>Ruta protegida</h2>
-
-            { user && (<h3>{user.email}</h3>)}
-            
-        </div>
+        <Fragment>  
+            <div className="mt-4 mb-4 card-header">
+                <h4 className="my-0 font-weight-normal text-center">Ruta Protegida</h4>
+            </div>
+            <div className="alert alert-info">
+                { user && ( <Firestore user={user} /> )}
+            </div>
+        </Fragment>
      );
 }
- 
+
 export default withRouter(Admin);
