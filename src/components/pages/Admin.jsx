@@ -5,20 +5,20 @@ import Firestore from '../tasklist/Firestore';
 
 
 const Admin = (props) => {
+    
+    const [user, setUser] = useState(null);
 
-    const [user, setUser] = useState(null)
 
-    useEffect(() => {
-
+    useEffect(() => { 
         if(auth.currentUser){
-            console.log('Existe el usuario')
-            setUser(auth.currentUser)
-        }else{
-            console.log('No existe el usuario')
-            props.history.push('/login')
-        }
-
-    }, [props.history])
+                console.log('Existe el usuario')
+                setUser(auth.currentUser)
+            }else{
+                console.log('No existe el usuario')
+                props.history.push('/login')
+            }
+          
+        },[props.history])
 
 
     return ( 
