@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {withRouter} from 'react-router-dom'
 
-import {auth} from '../firebase';
+import {auth} from '../server/firebase';
 
 const Reset = (props) => {
 
@@ -16,13 +16,10 @@ const Reset = (props) => {
             return
         }
         
-        //Limpiar el mensaje de error
         setError(null)
-
         recuperar()
     }
 
-//https://firebase.google.com/docs/auth/web/manage-users?authuser=0#send_a_password_reset_email
     const recuperar = useCallback(async () => {
         try{
             await auth.sendPasswordResetEmail(email)

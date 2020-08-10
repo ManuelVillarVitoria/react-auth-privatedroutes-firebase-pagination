@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {auth, db} from '../firebase';
+import {auth, db} from '../server/firebase';
 import {withRouter} from 'react-router-dom';
 
 const Login = (props) => {
@@ -25,7 +25,6 @@ const Login = (props) => {
             setError('Password de 6 carácteres o más')
             return
         }
-        //Limpiar el mensaje de error
         setError(null)
         console.log('Pasando todas las validaciones!')
 
@@ -47,7 +46,6 @@ const Login = (props) => {
             props.history.push('/admin')
 
         } catch (error) {
-            //console.log(error)
             if(error.code === 'auth/user-not-found') {
                 setError('Usuario no registrado')
             }
@@ -73,7 +71,6 @@ const Login = (props) => {
             props.history.push('/admin')
             
         } catch (error) { 
-            //console.log(error)
             if(error.code === 'auth/invalid-email') {
                 setError('E-mail no válido')
             }
@@ -97,7 +94,6 @@ const Login = (props) => {
                 <div className="col-12 col-sm-8 col-md-6 col-xl-4">
                     <form onSubmit={procesarDatos}>
 
-                    {/*error && = error ? : null*/}
                     { error && (<div className="alert alert-danger">{error}</div>) } 
 
                         <input

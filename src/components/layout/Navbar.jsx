@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
-import {auth} from '../firebase';
+import {auth} from '../server/firebase';
 import {withRouter} from 'react-router-dom';
 
 const Navbar = (props) => {

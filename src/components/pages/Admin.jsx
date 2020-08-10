@@ -1,7 +1,7 @@
 import React, {useEffect, useState, Fragment} from 'react';
 import {withRouter} from 'react-router-dom';
-import {auth} from '../firebase';
-import Firestore from './Firestore';
+import {auth} from '../server/firebase';
+import Firestore from '../tasklist/Firestore';
 
 
 const Admin = (props) => {
