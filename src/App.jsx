@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
+
 import {auth} from './components/server/firebase';
+
 import Routes from './components/Routes';
 
 
